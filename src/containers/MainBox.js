@@ -2,7 +2,20 @@ import React from 'react'
 import MenuBar from '../components/MenuBar.js'
 import { Profile, Photos, Cocktails, Pokemon} from '../components/Pages.js'
 
+
+const PageName = [<Profile />, <Photos/>, <Cocktails/>, <Pokemon/>];
 class MainBox extends React.Component {
+  constructor(){
+    super()
+    this.state={
+      currentPageNamendex: 0
+  
+    }
+  }
+
+  updateIndex= (newIndex) =>{
+    this.setState({ currentPageNamendex: newIndex})
+  }
 
 
   render() {
@@ -13,12 +26,12 @@ class MainBox extends React.Component {
 
     */
 
-    const detailsToDisplay = <div>Hi, I'm a div!</div>
+    // const detailsToDisplay = <div>Hi, I'm a div!</div>
 
     return (
       <div>
-        <MenuBar />
-        {detailsToDisplay}
+        <MenuBar pageIndex= {this.state.currentPageNamendex} updateIndex={this.updateIndex} />
+        {PageName[this.state.currentPageNamendex]}
       </div>
     )
   }
