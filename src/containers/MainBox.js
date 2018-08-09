@@ -4,6 +4,26 @@ import { Profile, Photos, Cocktails, Pokemon} from '../components/Pages.js'
 
 class MainBox extends React.Component {
 
+  constructor() {
+    super()
+    this.state = {
+      page: <Profile />,
+      pageString: "profile"
+    }
+  }
+
+  navBarSelect = (e) => {
+    let page = e.target.id
+    if (page === "profile") {
+      this.setState({page: <Profile />, pageString: page})
+    } else if (page === "photo") {
+      this.setState({page: <Photos />, pageString: page})
+    } else if (page === "cocktail") {
+      this.setState({page: <Cocktails />, pageString: page})
+    } else if (page === "pokemon") {
+      this.setState({page: <Pokemon />, pageString: page})
+    }
+  }
 
   render() {
 
@@ -17,8 +37,11 @@ class MainBox extends React.Component {
 
     return (
       <div>
-        <MenuBar />
-        {detailsToDisplay}
+        <MenuBar navBar={this.navBarSelect}
+          page={this.state.page}
+          pageString={this.state.pageString}
+        />
+        {this.state.page}
       </div>
     )
   }
